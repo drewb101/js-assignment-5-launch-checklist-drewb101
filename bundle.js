@@ -738,21 +738,40 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         launchStatus.innerHTML = "Shuttle not ready for launch";
         launchStatus.style.color = "red";
     }
-    else if(cargoLevel > 10000 && passValidation === true) {
+    if(cargoLevel > 10000 && passValidation === true) {
         list.style.visibility = "visible";
         cargoStatus.innerHTML = "Cargo mass too heavy for launch.";
         launchStatus.innerHTML = "Shuttle not ready for launch";
-        launchStatus.style.color = "red";
-        
+        launchStatus.style.color = "red";  
     }
-    else if(fuelLevel >= 10000 && cargoLevel <= 10000 && passValidation === true) {
+    if(fuelLevel < 10000 && cargoLevel > 10000) {
+        list.style.visibility = "visible";
+        fuelStatus.innerHTML = "Fuel level too low for launch.";
+        cargoStatus.innerHTML = "Cargo mass too heavy for launch.";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
+    }
+    if(fuelLevel < 10000 && cargoLevel <= 10000) {
+        list.style.visibility = "visible";
+        fuelStatus.innerHTML = "Fuel level too low for launch.";
+        cargoStatus.innerHTML = "Cargo mass low enough for launch.";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
+    }
+    if(fuelLevel >= 10000 && cargoLevel > 10000) {
+        list.style.visibility = "visible";
+        fuelStatus.innerHTML = "Fuel level high enough for launch.";
+        cargoStatus.innerHTML = "Cargo mass too heavy for launch.";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
+    }
+    if(fuelLevel >= 10000 && cargoLevel <= 10000) {
         list.style.visibility = "visible";
         fuelStatus.innerHTML = "Fuel level high enough for launch.";
         cargoStatus.innerHTML = "Cargo mass low enough for launch.";
         launchStatus.innerHTML = "Shuttle is ready for launch";
         launchStatus.style.color = "green";
     }
-
 }
 
 async function myFetch() {
